@@ -1,20 +1,36 @@
-(function(){
-'use strict';
+(function () {
+    'use strict';
 
-describe('Service: routeManage', function () {
+    describe('Service: routeManageProvider', function () {
 
-  // load the service's module
-  beforeEach(module('angularRouteManageApp'));
+        var provider;
 
-  // instantiate service
-  var routeManage;
-  beforeEach(inject(function (_routeManage_) {
-    routeManage = _routeManage_;
-  }));
+        beforeEach(module('angularRouteManageApp', function (routeManageProvider) {
+            provider = routeManageProvider;
+        }));
 
-  it('should do something', function () {
-    expect(!!routeManage).toBe(true);
-  });
+        it('should methods setNameConstantRoute and initConstantProvider defined', inject(function () {
+            expect(provider.setNameConstantRoute).not.toBe(undefined);
+            expect(provider.initConstantProvider).not.toBe(undefined);
 
-});
+        }));
+
+        describe('Service: routeManage', function () {
+
+            beforeEach(module('angularRouteManageApp'));
+            var routeManage;
+            beforeEach(inject(function ($injector) {
+                provider.setNameConstantRoute('test');
+                routeManage = $injector.get('routeManage');
+            }));
+
+            it('should constant use redefined', inject(function () {
+                expect(routeManage.getNameConstant()).toBe('test');
+
+            }));
+
+        });
+
+
+    });
 })();
