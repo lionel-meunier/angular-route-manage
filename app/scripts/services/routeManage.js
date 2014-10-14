@@ -28,11 +28,15 @@
             // Method for instantiating
             this.$get = function () {
 
-                function RoutManage(){
+                function RouteManage(){
 
                 }
 
-                return new RoutManage();
+                RouteManage.prototype.getNameConstant = function(){
+                    return nameConstantRoute;
+                }
+
+                return new RouteManage();
             };
         });
 })();
